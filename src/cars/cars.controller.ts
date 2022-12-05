@@ -5,12 +5,12 @@ import {
   Get,
   NotFoundException,
   Param,
-  ParseIntPipe,
   ParseUUIDPipe,
   Patch,
   Post,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
+import { CreateCarDto, UpdateCarDto } from './dto/index';
 
 @Controller('cars')
 export class CarsController {
@@ -32,27 +32,20 @@ export class CarsController {
   }
 
   @Post()
-  createCar(@Body() body) {
-    return this.carsService.addACar(body);
+  createCar(@Body() createCarDto: CreateCarDto) {
+    return this.carsService.addACar(createCarDto);
   }
 
   @Patch(':id')
-  upadteCarById(@Body() body, @Param('id', ParseUUIDPipe) id) {
-    const car = this.carsService.updateCar(id, body);
-    if (car) {
-      return car;
-    } else {
-      throw new NotFoundException();
-    }
+  upadteCarById(
+    @Body() updateCarDto: UpdateCarDto,
+    @Param('id', ParseUUIDPipe) id: string,
+  ) {
+    return this.carsService.updateCar(id, updateCarDto);
   }
 
   @Delete(':id')
   deleteCarById(@Param('id', ParseUUIDPipe) id) {
-    const car = this.carsService.deleteCar(id);
-    if (car) {
-      return car;
-    } else {
-      throw new NotFoundException();
-    }
+    return this.carsService.deleteCar(id);
   }
 }
