@@ -22,7 +22,7 @@ export class CarsController {
   }
 
   @Get(':id')
-  getCarById(@Param('id', ParseUUIDPipe) id) {
+  getCarById(@Param('id', ParseUUIDPipe) id: string) {
     const car = this.carsService.findACar(id);
     if (car) {
       return car;
@@ -45,7 +45,7 @@ export class CarsController {
   }
 
   @Delete(':id')
-  deleteCarById(@Param('id', ParseUUIDPipe) id) {
+  deleteCarById(@Param('id', ParseUUIDPipe) id: string) {
     return this.carsService.deleteCar(id);
   }
 }

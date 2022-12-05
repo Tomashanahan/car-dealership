@@ -3,16 +3,15 @@ import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
 import { Brand } from './entities/brand.entity';
 import { v4 as uuid } from 'uuid';
+import { Brands } from './interfaces/brands.interfaces';
 
 @Injectable()
 export class BrandsService {
-  private brands: Brand[] = [
-    {
-      id: uuid(),
-      createdAt: new Date().getTime(),
-      name: 'Bmw',
-    },
-  ];
+  private brands: Brands[] = [];
+
+  seedBrandFeel(brands_seed: Brand[]) {
+    this.brands = brands_seed;
+  }
 
   create(createBrandDto: CreateBrandDto) {
     this.brands.push({

@@ -8,23 +8,11 @@ import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class CarsService {
-  private cars: Car[] = [
-    {
-      id: uuid(),
-      brand: 'Bmw',
-      model: 'M5',
-    },
-    {
-      id: uuid(),
-      brand: 'Audi',
-      model: 'rs7',
-    },
-    {
-      id: uuid(),
-      brand: 'Mecedes Benz',
-      model: 'c63 amg',
-    },
-  ];
+  private cars: Car[] = [];
+
+  seedCarFeel(cars_seed: Car[]) {
+    this.cars = cars_seed;
+  }
 
   findAllCars() {
     return this.cars;
